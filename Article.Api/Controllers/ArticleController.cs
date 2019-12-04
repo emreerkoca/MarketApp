@@ -26,7 +26,7 @@ namespace Article.Api.Controllers
 
         #region Add Article
         [HttpPost("AddArticle")]
-        public async Task<IActionResult> AddArticle(ArticleModel newArticle)
+        public async Task<IActionResult> AddArticle([FromBody] ArticleModel newArticle)
         {
             var result = await _articleRepository.AddAsync(newArticle);
 
@@ -56,7 +56,7 @@ namespace Article.Api.Controllers
 
         #region Update Article   
         [HttpPut("UpdateArticle")]
-        public async Task<IActionResult> UpdateArticle(ArticleModel updatedArticle)
+        public async Task<IActionResult> UpdateArticle([FromBody] ArticleModel updatedArticle)
         {
             var result = await _articleRepository.UpdateAsync(updatedArticle);
 
