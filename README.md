@@ -1,4 +1,4 @@
-###Requirements
+### Requirements
 
 - Dotnet Core 3.0
 - Visual Studio 2019
@@ -14,7 +14,7 @@
  
 Example for 3rd party request service:
 
-https://localhost:44362/api/article/AddArticle POST 
+/api/article/AddArticle POST 
 
 **Pre-request Script:** 
 
