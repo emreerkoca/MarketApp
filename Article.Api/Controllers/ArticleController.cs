@@ -55,22 +55,38 @@ namespace Article.Api.Controllers
         #endregion
 
         #region Update Article   
-        [HttpPut("UpdateArticle")]
-        public async Task<IActionResult> UpdateArticle([FromBody] ArticleModel updatedArticle)
+        [HttpPut("UpdateArticle/{articleId}")]
+        public async Task<IActionResult> UpdateArticle(int articleId, [FromBody] ArticleModel updatedArticle)
         {
-            var result = await _articleRepository.UpdateAsync(updatedArticle);
+            var article = _articleRepository.GetByIdAsync(articleId).Result;
 
-            if (!result)
+
+            if(article != null)
             {
-                return BadRequest("Could not update article.");
+                article.ApplauseAmount = updatedArticle.ApplauseAmount;
+                article.Content = updatedArticle.Content;
+                article.CreationTime = updatedArticle.CreationTime;
+                article.Keywords = updatedArticle.Keywords;
+                article.OwnerId = updatedArticle.OwnerId;
+                article.Title = updatedArticle.Title;
+                article.ViewCount = updatedArticle.ViewCount;
+
+                var result = await _articleRepository.UpdateAsync(article);
+
+                if (!result)
+                {
+                    return BadRequest("Could not update article.");
+                }
+
+                return Ok(updatedArticle);
             }
 
-            return Ok(updatedArticle);
+            return BadRequest("Could not find article.");
         }
         #endregion
 
         #region Delete Article
-        [HttpDelete("DeleteArticle")]
+        [HttpDelete("DeleteArticle/{articleId}")]
         public async Task<IActionResult> DeleteArticle(int articleId)
         {
             ArticleModel deletedArticle = await _articleRepository.GetByIdAsync(articleId);

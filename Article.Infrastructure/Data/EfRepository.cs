@@ -33,9 +33,9 @@ namespace Article.Infrastructure.Data
             return saveResult == 1;
         }
 
-        public virtual ValueTask<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            return _appDbContext.Set<T>().FindAsync(id);
+            return await _appDbContext.Set<T>().FindAsync(id);
         }
 
         public async Task<IReadOnlyList<T>> GetListAllAsync()
