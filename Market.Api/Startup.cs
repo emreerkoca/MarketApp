@@ -31,7 +31,7 @@ namespace Market.Api
             services.AddControllers();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ArticleApiConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("MarketDbConnection")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
 

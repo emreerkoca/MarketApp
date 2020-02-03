@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1B508E5E-D1AA-4D76-820A-3389DC47C702}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Core", "Article.Core\Market.Core.csproj", "{192950E2-15FA-4C03-8224-07231817822C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Core", "Market.Core\Market.Core.csproj", "{192950E2-15FA-4C03-8224-07231817822C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Infrastructure", "Article.Infrastructure\Market.Infrastructure.csproj", "{5986DE2D-A014-42F5-9817-9B77380229D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Infrastructure", "Market.Infrastructure\Market.Infrastructure.csproj", "{5986DE2D-A014-42F5-9817-9B77380229D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Api", "Article.Api\Market.Api.csproj", "{5EF1D6AB-F528-4E40-BB6D-016F462D1080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market.Api", "Market.Api\Market.Api.csproj", "{5EF1D6AB-F528-4E40-BB6D-016F462D1080}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Web", "Market.Web\Market.Web.csproj", "{1C992D2A-BCC3-4F7A-80F9-CFA9C2258A9B}"
 EndProject

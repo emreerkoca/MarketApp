@@ -17,7 +17,7 @@ namespace Market.Infrastructure.Data
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
 
-            var connectionString = configuration.GetConnectionString("MarketApiConnection");
+            var connectionString = configuration.GetConnectionString("MarketDbConnection");
             optionsBuilder.UseSqlServer(connectionString);
 
             return new AppDbContext(optionsBuilder.Options);
