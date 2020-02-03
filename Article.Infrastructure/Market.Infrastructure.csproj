@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Article.Core\Article.Core.csproj" />
+    <ProjectReference Include="..\Article.Core\Market.Core.csproj" />
   </ItemGroup>
 
 </Project>

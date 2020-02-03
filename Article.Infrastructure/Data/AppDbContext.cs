@@ -1,10 +1,10 @@
-﻿using Article.Core.Entities;
+﻿using Market.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Article.Infrastructure.Data
+namespace Market.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
@@ -13,6 +13,11 @@ namespace Article.Infrastructure.Data
 
         }
 
-        public DbSet<ArticleModel> Article { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<SubCategory> SubCategory { get; set; }
+        public DbSet<Brand> Brand { get; set; }
+        public DbSet<BasketItem> BasketItem { get; set; }
+        public DbSet<Basket> Basket { get; set; }
     }
 }

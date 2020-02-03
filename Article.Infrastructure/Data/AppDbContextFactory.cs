@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Article.Infrastructure.Data
+namespace Market.Infrastructure.Data
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
@@ -17,7 +17,7 @@ namespace Article.Infrastructure.Data
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
 
-            var connectionString = configuration.GetConnectionString("ArticleApiConnection");
+            var connectionString = configuration.GetConnectionString("MarketApiConnection");
             optionsBuilder.UseSqlServer(connectionString);
 
             return new AppDbContext(optionsBuilder.Options);

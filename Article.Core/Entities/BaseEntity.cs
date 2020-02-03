@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Article.Core.Entities
+namespace Market.Core.Entities
 {
     public class BaseEntity
     {

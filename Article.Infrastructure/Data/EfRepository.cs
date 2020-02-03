@@ -1,12 +1,12 @@
-﻿using Article.Core.Entities;
-using Article.Core.Interfaces;
+﻿using Market.Core.Entities;
+using Market.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Article.Infrastructure.Data
+namespace Market.Infrastructure.Data
 {
     public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
     {

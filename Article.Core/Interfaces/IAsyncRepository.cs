@@ -1,10 +1,10 @@
-﻿using Article.Core.Entities;
+﻿using Market.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Article.Core.Interfaces
+namespace Market.Core.Interfaces
 {
     public interface IAsyncRepository<T> where T : BaseEntity
     {
