@@ -6,7 +6,9 @@ namespace Market.Core.Entities
 {
     public class Basket : BaseEntity
     {
-        public int UserId { get; set; }
         public ICollection<BasketItem> Items { get; set; }
+
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }
