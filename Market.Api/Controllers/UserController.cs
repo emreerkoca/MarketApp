@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Market.Api.Models;
+using Market.Core.Entities;
 using Market.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -35,5 +36,11 @@ namespace Market.Api.Controllers
 
             return Ok(user);
         }
+
+        //[AllowAnonymous]
+        //[HttpPost("register")]
+        //public async Task<IActionResult> RegisterUser([FromBody] User user)
+        //{
+        //}
     }
 }

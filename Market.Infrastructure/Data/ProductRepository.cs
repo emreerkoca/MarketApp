@@ -13,7 +13,6 @@ namespace Market.Infrastructure.Data
     {
         public ProductRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            
         }
 
         public async Task<IReadOnlyList<Product>> SearchProductsByCategory(string category)

@@ -13,14 +13,12 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Market.Infrastructure.Data
 {
-    public class UserService : IUserService 
+    public class UserService : EfRepository<User> ,IUserService 
     {
-        protected readonly AppDbContext _appDbContext;
         public IConfiguration Configuration { get; }
 
-        public UserService(AppDbContext appDbContext, IConfiguration configuration)
+        public UserService(AppDbContext appDbContext, IConfiguration configuration) : base(appDbContext)
         {
-            _appDbContext = appDbContext;
             Configuration = configuration;
         }
 
@@ -59,7 +57,12 @@ namespace Market.Infrastructure.Data
 
         string GetSaltedEndHashedPassword(string password)
         {
-            return "";
+            return ""; 
+        }
+
+        Task IUserService.AddAsync(User user)
+        {
+            throw new NotImplementedException(); 
         }
     }
 }
