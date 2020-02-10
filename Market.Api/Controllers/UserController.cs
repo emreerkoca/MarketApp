@@ -37,10 +37,18 @@ namespace Market.Api.Controllers
             return Ok(user);
         }
 
-        //[AllowAnonymous]
-        //[HttpPost("register")]
-        //public async Task<IActionResult> RegisterUser([FromBody] User user)
-        //{
-        //}
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser([FromBody] User user)
+        {
+            var registeredUser = await _userService.AddNewUserAsync(user);
+
+            if (registeredUser == null)
+            {
+                return BadRequest(new { message = "Username taken!" });
+            }
+
+            return Ok();
+        }
     }
 }

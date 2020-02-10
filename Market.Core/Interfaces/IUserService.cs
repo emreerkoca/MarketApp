@@ -10,6 +10,6 @@ namespace Market.Core.Interfaces
     {
         User Authenticate(string username, string password);
         IEnumerable<User> GetUsersForClient();
-        Task AddAsync(User user);
+        Task<User> AddNewUserAsync(User user);
     }
 }

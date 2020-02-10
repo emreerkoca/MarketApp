@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Market.Core.Entities;
 using Market.Core.Interfaces;
 using Market.Infrastructure.Data;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -60,9 +62,42 @@ namespace Market.Infrastructure.Data
             return ""; 
         }
 
-        Task IUserService.AddAsync(User user)
+        public async Task<User> AddNewUserAsync(User user)
         {
-            throw new NotImplementedException(); 
+            var existingUsers = _appDbContext.User.Where(x => x.UserName == user.UserName).ToList();
+
+            if (existingUsers != null)
+            {
+                return null;
+            }
+
+            SaltAndHashUsersPassword(user);
+
+            _appDbContext.User.Add(user);
+
+            await _appDbContext.SaveChangesAsync();
+
+            return user;
+        }
+
+        void SaltAndHashUsersPassword(User user)
+        {
+            byte[] salt = new byte[128 / 8];
+
+            using (var rndNumberGenerator = RandomNumberGenerator.Create())
+            {
+                rndNumberGenerator.GetBytes(salt);
+            }
+
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: user.Password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            user.Salt = Convert.ToBase64String(salt);
+            user.Password = hashedPassword;
         }
     }
 }
