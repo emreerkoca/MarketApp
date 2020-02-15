@@ -26,9 +26,40 @@ namespace Market.Infrastructure.Data
 
         public User Authenticate(string username, string password)
         {
-            var user = _appDbContext.User.SingleOrDefault(x => x.UserName == username && x.Password == GetSaltedEndHashedPassword(password));
+            //var user = _appDbContext.User.SingleOrDefault(x => x.UserName == username && x.Password == GetSaltedEndHashedPassword(password));
 
-            if (user == null)
+            //if (user == null)
+            //{
+            //    return null;
+            //}
+
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AuthorityManagement:Secret"));
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(new Claim[] {
+            //        new Claim(ClaimTypes.Name, user.Id.ToString())
+            //    }),
+            //    Expires = DateTime.UtcNow.AddDays(7),
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            //};
+
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            //user.Token = tokenHandler.WriteToken(token);
+            //user.Password = null;
+
+            //return user;
+            
+            //It' s created temporarily. It' ll change. 
+            User user = new User();
+
+            user.FirstName = "test";
+            user.LastName = "test";
+            user.UserName = "test";
+            user.Password = "test";
+
+            if (username != user.UserName && password != user.Password)
             {
                 return null;
             }

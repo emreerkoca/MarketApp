@@ -10,6 +10,7 @@ namespace Market.Core.Entities
         public string Keywords { get; set; }
         public int StockCount { get; set; }
         public double Price { get; set; }
+        public string Image { get; set; }
 
         public int? SubCategoryId { get; set; }
         public virtual SubCategory SubCategory { get; set; }
