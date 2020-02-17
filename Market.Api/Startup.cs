@@ -59,7 +59,7 @@ namespace Market.Api
                 });
 
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
 

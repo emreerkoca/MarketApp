@@ -10,16 +10,17 @@ using Market.Core.Entities;
 using Market.Core.Interfaces;
 using Market.Infrastructure.Data;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Market.Infrastructure.Data
 {
-    public class UserService : EfRepository<User> ,IUserService 
+    public class UserRepository : EfRepository<User> ,IUserRepository 
     {
         public IConfiguration Configuration { get; }
 
-        public UserService(AppDbContext appDbContext, IConfiguration configuration) : base(appDbContext)
+        public UserRepository(AppDbContext appDbContext, IConfiguration configuration) : base(appDbContext)
         {
             Configuration = configuration;
         }
@@ -129,6 +130,43 @@ namespace Market.Infrastructure.Data
 
             user.Salt = Convert.ToBase64String(salt);
             user.Password = hashedPassword;
+        }
+
+        public async Task<Basket> AddToBasketAsync(BasketItem basketItem)
+        {
+            var basket = _appDbContext.Basket.Where(x => x.UserId == basketItem.UserId && x.ActivationStatus).SingleOrDefault();
+
+            if (basket != null)
+            {
+                basket.Items.Add(basketItem);
+
+                _appDbContext.Entry(basket).State = EntityState.Modified;
+
+                var result = await _appDbContext.SaveChangesAsync();
+
+                if(result == 1) 
+                {
+                    return basket;
+                }
+            }
+            else
+            {
+                Basket usersBasket = new Basket();
+
+                usersBasket.UserId = basketItem.UserId;
+                usersBasket.ActivationStatus = true;
+
+                _appDbContext.Basket.Add(usersBasket);
+
+                var result = await _appDbContext.SaveChangesAsync();
+
+                if (result == 1) 
+                {
+                    return basket;
+                }
+            }
+
+            return null;
         }
     }
 }

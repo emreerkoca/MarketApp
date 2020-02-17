@@ -15,11 +15,11 @@ namespace Market.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService _userService;
+        private IUserRepository _userRepository;
 
-        public UserController(IUserService userService)
+        public UserController(IUserRepository userService)
         {
-            _userService = userService;
+            _userRepository = userService;
         }
 
 
@@ -27,7 +27,7 @@ namespace Market.Api.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticateModel model)
         {
-            var user = _userService.Authenticate(model.UserName, model.Password);
+            var user = _userRepository.Authenticate(model.UserName, model.Password);
 
             if (user == null)
             {
@@ -41,13 +41,20 @@ namespace Market.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User user)
         {
-            var registeredUser = await _userService.AddNewUserAsync(user);
+            var registeredUser = await _userRepository.AddNewUserAsync(user);
 
             if (registeredUser == null)
             {
                 return BadRequest(new { message = "Username taken!" });
             }
 
+            return Ok();
+        }
+
+        public async Task<IActionResult> AddToBasket([FromBody] BasketItem basketItem) 
+        {
+            var basket = await _userRepository.AddToBasketAsync(basketItem);
+            
             return Ok();
         }
     }
