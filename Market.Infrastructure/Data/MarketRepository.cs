@@ -1,25 +1,31 @@
 ﻿using Market.Core.Entities;
 using Market.Core.Interfaces;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Market.Infrastructure.Data
 {
-    public class ProductRepository : EfRepository<Product>, IProductRepository
+    public class MarketRepository : EfRepository<Product>, IMarketRepository
     {
-        public ProductRepository(AppDbContext appDbContext) : base(appDbContext)
+        public IConfiguration Configuration { get; }
+
+        public MarketRepository(AppDbContext appDbContext, IConfiguration configuration) : base(appDbContext)
         {
+            Configuration = configuration;
         }
 
         public async Task<IReadOnlyList<Product>> SearchProductsByCategory(string category)
         {
             var products = await _appDbContext.Product
                 .Where(x => x.Name.Contains(category))
-                .ToListAsync(); //todo: change this. Category won' t be like this.
+                .ToListAsync();
 
             return products;
         }
@@ -39,5 +45,7 @@ namespace Market.Infrastructure.Data
 
             return products;
         }
+
+
     }
 }

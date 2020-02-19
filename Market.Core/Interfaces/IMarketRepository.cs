@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Core.Interfaces
 {
-    public interface IProductRepository : IAsyncRepository<Product>
+    public interface IMarketRepository : IAsyncRepository<Product>
     {
         Task<IReadOnlyList<Product>> SearchProductsByCategory(string searchText);
         Task<IReadOnlyList<Product>> SearchProductsByKeywords(string[] keywords);

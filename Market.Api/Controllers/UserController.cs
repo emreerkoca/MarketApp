@@ -17,9 +17,9 @@ namespace Market.Api.Controllers
     {
         private IUserRepository _userRepository;
 
-        public UserController(IUserRepository userService)
+        public UserController(IUserRepository userRepository)
         {
-            _userRepository = userService;
+            _userRepository = userRepository;
         }
 
 
@@ -51,11 +51,15 @@ namespace Market.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous] //Temporary solition for jwt authentication
+        [HttpPost("add-to-basket")]
         public async Task<IActionResult> AddToBasket([FromBody] BasketItem basketItem) 
         {
             var basket = await _userRepository.AddToBasketAsync(basketItem);
             
             return Ok();
         }
+
+    
     }
 }

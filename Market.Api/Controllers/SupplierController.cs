@@ -16,19 +16,19 @@ namespace Market.Api.Controllers
     public class SupplierController : ControllerBase
     {
         #region Fields
-        private readonly IProductRepository _productRepository;
+        private readonly ISupplierRepository _supplierRepository;
         #endregion
 
-        public SupplierController(IProductRepository productRepository)
+        public SupplierController(ISupplierRepository productRepository)
         {
-            _productRepository = productRepository;
+            _supplierRepository = productRepository;
         }
 
         #region Add Product
-        [HttpPost("AddProduct")]
+        [HttpPost("add-product")]
         public async Task<IActionResult> AddProduct([FromBody] Product newProduct)
         {
-            var result = await _productRepository.AddAsync(newProduct);
+            var result = await _supplierRepository.AddAsync(newProduct);
 
             if (result == null)
             {
@@ -40,10 +40,10 @@ namespace Market.Api.Controllers
         #endregion
 
         #region Get All Products
-        [HttpGet("GetAllProducts")]
+        [HttpGet("products")]
         public async Task<IActionResult> GetAllProducts()
         {
-            IReadOnlyList<Product> productList = await _productRepository.GetListAllAsync();
+            IReadOnlyList<Product> productList = await _supplierRepository.GetListAllAsync();
 
             if (productList == null)
             {
@@ -55,17 +55,17 @@ namespace Market.Api.Controllers
         #endregion
 
         #region Update Product   
-        [HttpPut("UpdateProduct/{productId}")]
+        [HttpPut("update-product/{productId}")]
         public async Task<IActionResult> UpdateProduct(int productId, [FromBody] Product updatedProduct)
         {
-            var product = _productRepository.GetByIdAsync(productId).Result;
+            var product = _supplierRepository.GetByIdAsync(productId).Result;
 
 
             if (product != null)
             {
                 product.Name = updatedProduct.Name;
 
-                var result = await _productRepository.UpdateAsync(product);
+                var result = await _supplierRepository.UpdateAsync(product);
 
                 if (!result)
                 {
@@ -80,12 +80,12 @@ namespace Market.Api.Controllers
         #endregion
 
         #region Delete Product
-        [HttpDelete("DeleteProduct/{productId}")]
+        [HttpDelete("delete-product/{productId}")]
         public async Task<IActionResult> DeleteProduct(int productId)
         {
-            Product deletedProduct = await _productRepository.GetByIdAsync(productId);
+            Product deletedProduct = await _supplierRepository.GetByIdAsync(productId);
 
-            var result = await _productRepository.DeleteAsync(deletedProduct);
+            var result = await _supplierRepository.DeleteAsync(deletedProduct);
 
             if (!result)
             {

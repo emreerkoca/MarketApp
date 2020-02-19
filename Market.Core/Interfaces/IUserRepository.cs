@@ -8,9 +8,8 @@ namespace Market.Core.Interfaces
 {
     public interface IUserRepository
     {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetUsersForClient();
         Task<User> AddNewUserAsync(User user);
+        User Authenticate(string username, string password);
         Task<Basket> AddToBasketAsync(BasketItem basketItem);
     }
 }

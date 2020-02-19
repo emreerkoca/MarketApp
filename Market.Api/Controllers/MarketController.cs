@@ -10,27 +10,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MarketController : ControllerBase
     {
         #region Fields
-        private readonly IProductRepository _productRepository;
+        private readonly IMarketRepository _marketRepository;
         #endregion
 
         #region Ctor
-        public MarketController(IProductRepository productRepository)
+        public MarketController(IMarketRepository marketRepository)
         {
-            _productRepository = productRepository;
+            _marketRepository = marketRepository;
         }
         #endregion
 
         #region Get All Products
-        [HttpGet("GetAllProducts")]
+        [HttpGet("products")]
         public async Task<IActionResult> GetAllProducts()
         {
-            IReadOnlyList<Product> productList = await _productRepository.GetListAllAsync();
+            IReadOnlyList<Product> productList = await _marketRepository.GetListAllAsync();
 
             if (productList == null)
             {
@@ -42,10 +41,10 @@ namespace Market.Api.Controllers
         #endregion
 
         #region Get Products By Category 
-        [HttpGet("SearchProductsByCategory/{categories}")]
+        [HttpGet("search/{categories}")]
         public async Task<IActionResult> SearchProductsByCategory(string categories)
         {
-            IReadOnlyList<Product> productList = await _productRepository.SearchProductsByCategory(categories);
+            IReadOnlyList<Product> productList = await _marketRepository.SearchProductsByCategory(categories);
 
             if (productList == null)
             {
@@ -57,10 +56,10 @@ namespace Market.Api.Controllers
         #endregion
 
         #region Search Products By Keywords 
-        [HttpPost("SearchProductsByKeywords")]
+        [HttpPost("search-by-keywords")]
         public async Task<IActionResult> SearchProductsByKeywords([FromBody] string[] keywords)
         {
-            IReadOnlyList<Product> productList = await _productRepository.SearchProductsByKeywords(keywords);
+            IReadOnlyList<Product> productList = await _marketRepository.SearchProductsByKeywords(keywords);
 
             if (productList == null)
             {
