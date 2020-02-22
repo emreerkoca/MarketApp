@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/market/GetAllProducts",
+      "launchUrl": "api/market/products",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "Market.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/market/GetAllProducts",
+      "launchUrl": "api/market/products",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
